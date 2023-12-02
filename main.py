@@ -12,15 +12,6 @@ def is_host_online(host, port):
         # Try to connect to the host
         s.connect((host, port))
         s.close()  # Close the socket if connection succeeds
-        return True
+        return f"The host {host} is online"
     except socket.error:
-        return False
-
-
-host_to_check = 'google.com'
-port_to_check = 80
-
-if is_host_online(host_to_check, port_to_check):
-    print(f"The host {host_to_check} is online")
-else:
-    print(f"The host {host_to_check} is offline")
+        return f"The host {host} is offline"
