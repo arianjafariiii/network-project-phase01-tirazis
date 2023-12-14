@@ -1,10 +1,15 @@
 import socket
+def state():
+    #Get entries and seperate them to use them in function
+    host = input("Enter host : ")
+    ports_s = input("Enter ports : ")
+    ports_l = ports_s.split(' ')
+    ports = [int(e) for e in ports_l]
+    #Run for each port
+    for por in ports:
+        check_port(host, por)
+    
 
-#Get entries and seperate them to use them in function
-host = input("Enter host : ")
-ports_s = input("Enter ports : ")
-ports_l = ports_s.split(' ')
-ports = [int(e) for e in ports_l]
 
 
 
@@ -27,5 +32,4 @@ def check_port(host, port):
     finally:
         sock.close()
 
-for por in ports:
-    check_port(host, por)
+
