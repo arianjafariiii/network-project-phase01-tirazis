@@ -63,8 +63,7 @@ def send_get_request(host, port, user_in):
     response = client.recv(1024)
     print(f"Response for user {user_input[8:10]}: {response.decode()}")
 
-def post_user_to_server(server_url, user_data):
-    host, port = server_url.split(':')
+def post_user_to_server(port, host, user_data):
     port = int(port)
     request = f"POST {user_data}"
 
@@ -75,33 +74,20 @@ def post_user_to_server(server_url, user_data):
         response = client_socket.recv(1024).decode()
         print(response)
 
-
-
-
-
-
-
-
-
 # Main
 
 Host = 'localhost'
 Port = 8081
-server_url = "localhost:8081"
+server_url = Host + ':' + Host
 
 
-print(is_host_online(Host), '55555')
 while True:
 
     user_input = input()
     if 'GET' in user_input:
         send_get_request('localhost', 8081, user_input)
-    elif 'POST' in user_input:
-        
-        post_user_to_server(server_url,user_input )      
+    elif 'POST' in user_input: 
+        post_user_to_server(Port, Host, user_input )      
 
-
-
-# Example usage:
 
 
