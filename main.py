@@ -2,7 +2,8 @@ import socket
 
 
 # Check if a host is online
-def is_host_online(host, port):
+def is_host_online(host):
+    port = 80
     try:
         # Create a socket object
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -37,7 +38,10 @@ def check_port(host, port):
     try:
         sock.connect((host, port))
         # Get service of the port
-        service_name = socket.getservbyport(port, 'tcp')
+        try:
+            service_name = socket.getservbyport(port, 'tcp')
+        except OSError:
+            service_name = "Unknown"
         print(f"{host} is online      --port: {port}     --service: {service_name}")
 
     except socket.error:
@@ -64,7 +68,7 @@ def send_get_request(host, port, user_in):
 Host = 'localhost'
 Port = 8081
 
-print(is_host_online(Host, Port))
+print(is_host_online(Host))
 while True:
 
     user_input = input()
