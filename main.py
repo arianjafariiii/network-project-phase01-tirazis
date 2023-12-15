@@ -31,7 +31,7 @@ def state():
 def check_port(host, port):
     # Make an object of socket to connect
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
+    sock.settimeout(5)
 
     # Check is the host online or not and if yes get other information
     try:
@@ -45,3 +45,28 @@ def check_port(host, port):
         return True
     finally:
         sock.close()
+
+
+def send_get_request(host, port, user_in):
+    # Connect to the server
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((host, port))
+
+    # Format
+    message = user_in
+    client.send(message.encode())
+    response = client.recv(1024)
+    print(f"Response for user {user_input[8:10]}: {response.decode()}")
+
+
+# Main
+
+Host = 'localhost'
+Port = 8081
+
+print(is_host_online(Host, Port))
+while True:
+
+    user_input = input()
+    if 'GET' in user_input:
+        send_get_request('localhost', 8081, user_input)

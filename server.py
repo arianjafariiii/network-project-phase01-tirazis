@@ -34,7 +34,7 @@ def handle_post_request(request):
 
 def main():
     host = 'localhost'
-    port = 8080
+    port = 8081
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
