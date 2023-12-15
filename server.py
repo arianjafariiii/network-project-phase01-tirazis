@@ -1,4 +1,5 @@
 import socket
+import json
 
 # Sample user data
 users = {
@@ -24,9 +25,9 @@ def handle_get_request(request):
 
 
 def handle_post_request(request):
-    command = request.split(' ')
-    name = command[1]
-    age = command[2]
+    print(request)
+    name = request.split(' ')[2]
+    age = int(request.split(' ')[3])
     users[f'user{len(users) + 1}'] = {'name': name, 'age': int(age)}
     response = "HTTP/1.1 200 OK\n\nUser data updated"
     return response

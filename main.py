@@ -1,4 +1,5 @@
 import socket
+import json
 
 
 # Check if a host is online
@@ -62,15 +63,45 @@ def send_get_request(host, port, user_in):
     response = client.recv(1024)
     print(f"Response for user {user_input[8:10]}: {response.decode()}")
 
+def post_user_to_server(server_url, user_data):
+    host, port = server_url.split(':')
+    port = int(port)
+    request = f"POST {user_data}"
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+        client_socket.connect((host, port))
+        client_socket.sendall(request.encode())
+
+        response = client_socket.recv(1024).decode()
+        print(response)
+
+
+
+
+
+
+
+
 
 # Main
 
 Host = 'localhost'
 Port = 8081
+server_url = "localhost:8081"
 
-print(is_host_online(Host))
+
+print(is_host_online(Host), '55555')
 while True:
 
     user_input = input()
     if 'GET' in user_input:
         send_get_request('localhost', 8081, user_input)
+    elif 'POST' in user_input:
+        
+        post_user_to_server(server_url,user_input )      
+
+
+
+# Example usage:
+
+
